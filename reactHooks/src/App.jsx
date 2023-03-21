@@ -1,11 +1,17 @@
 import { useState } from 'react'
 import './App.css'
 
+
+function countInit(){
+  console.log('run function');
+  return 9;
+};
+
 function App() {
 
   let msg='<Welcome World/>'
   
-const [count, setCount]=useState(9);
+const [count, setCount]=useState(()=>countInit());
 
 function decrCount(){
   setCount(prevCount=>prevCount-1);
