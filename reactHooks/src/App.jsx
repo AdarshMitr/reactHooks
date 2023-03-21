@@ -11,14 +11,17 @@ function App() {
 
   let msg='<Welcome World/>'
   
-const [count, setCount]=useState(()=>countInit());
+const [count, setCount]=useState(9);
+const [theme, setTheme]=useState('white');
 
 function decrCount(){
-  setCount(prevCount=>prevCount-1);
+   setCount(prevCount=>prevCount-1) ;
+   setTheme('white');
 }
 
 function incrCount(){
-  setCount(prevCount=>prevCount+1);
+  setCount(prevCount=>prevCount+1)  ;
+  setTheme('black');
 }
   return (
      <>
@@ -26,6 +29,7 @@ function incrCount(){
      <br />
       <button onClick={decrCount}>-</button>
       <span> {count} </span>
+      <span> {theme} </span>
       <button onClick={incrCount}>+</button>
      
      </>
