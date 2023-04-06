@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 
@@ -8,6 +8,9 @@ function countInit(){
 };
 
 function App() {
+
+  /*
+// ----------- useState hook example  ----------
 
   let msg='<Welcome World/>'
   
@@ -28,12 +31,51 @@ function incrCount(){
      <h1>{msg}</h1>
      <br />
       <button onClick={decrCount}>-</button>
-      <span> {count} </span>
-      <span> {theme} </span>
-      <button onClick={incrCount}>+</button>
-     
+      <span> Count &#9758; {count} </span>
+    
+      <button onClick={incrCount}>+</button><br /><hr />
+      <span>  Theme :{theme} </span>
      </>
   )
-}
 
+
+// ----------- useState hook example end  ----------
+
+*/
+
+
+
+
+
+const [resourceType, setResourceType]= useState('posts')
+const [items,setItems]=useState([])
+console.log('render');
+
+useEffect(()=>{
+  fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
+.then(response => response.json())
+.then(json => setItems(json))
+} ,[resourceType])
+
+return(
+  <>
+  <div id='useEffect'>
+  <button onClick={()=>setResourceType('posts')}>Posts</button>
+  <button onClick={()=>setResourceType('users')}>Users</button>
+  <button onClick={()=>setResourceType('comments')}>Comments</button>
+
+  <h1>{resourceType}</h1>
+
+  {items.map(item=>{
+return <pre>{JSON.stringify(item)}</pre>
+  })}
+  </div>
+  
+  </>
+
+  
+)
+
+}
 export default App
+
