@@ -1,94 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
 
 
-function countInit(){
-  console.log('run function');
-  return 9;
-};
+
 
 function App() {
 
-  /*
-// ----------- useState hook example  ----------
+// 1.DOM Reference
+// 2. useRef for string the previous State
+// 3. hold mutable value prevent re-render of component 
 
-  let msg='<Welcome World/>'
-  
-const [count, setCount]=useState(9);
-const [theme, setTheme]=useState('white');
+const [name,setName]=useState('');
 
-function decrCount(){
-   setCount(prevCount=>prevCount-1) ;
-   setTheme('white');
+const inputEl=useRef('');
+console.log(inputEl)
+
+const resetInput=()=>{
+  setName('');
+  inputEl.current.focus();
 }
-
-function incrCount(){
-  setCount(prevCount=>prevCount+1)  ;
-  setTheme('black');
-}
-  return (
-     <>
-     <h1>{msg}</h1>
-     <br />
-      <button onClick={decrCount}>-</button>
-      <span> Count &#9758; {count} </span>
-    
-      <button onClick={incrCount}>+</button><br /><hr />
-      <span>  Theme :{theme} </span>
-     </>
-  )
-
-
-// ----------- useState hook example end  ----------
-
-*/
-
-
-
-
-
-const [windowWidth, setWindowWidth]= useState(window.innerWidth)
-
-// const [items,setItems]=useState([])
-// console.log('render');
-
-
-// useEffect(()=>{
-//   fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
-// .then(response => response.json())
-// .then(json => setItems(json))
-// } ,[resourceType])
-
-const handleResize=()=>{
-  setWindowWidth(window.innerWidth)
-}
-useEffect(()=>{
-window.addEventListener('resize',handleResize)
-
-return()=>{
-  window.removeEventListener('resize',handleResize)
-}
-},[])
-
-return(
-  <>
-  {windowWidth}
-  {/* <div id='useEffect'>
-  <button onClick={()=>setResourceType('posts')}>Posts</button>
-  <button onClick={()=>setResourceType('users')}>Users</button>
-  <button onClick={()=>setResourceType('comments')}>Comments</button>
-
-  <h1>{resourceType}</h1>
-
-  {items.map(item=>{
-return <pre>{JSON.stringify(item)}</pre>
-  })}
-  </div> */}
-
-  
-  </>
-
-  
+return (
+  <div className="App">
+    <div>
+      <input 
+      ref={inputEl}
+      type="text" 
+      name='name'
+      autoComplete='off'
+      value={name}
+      onChange={(e)=>setName(e.target.value)}
+       />
+       <button onClick={resetInput}>Reset</button>
+    </div>
+    <h2>My name is {name}</h2>
+  </div>
 )
 
 }
